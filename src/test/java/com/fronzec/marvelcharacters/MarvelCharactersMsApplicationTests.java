@@ -8,6 +8,7 @@ class MarvelCharactersMsApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }
