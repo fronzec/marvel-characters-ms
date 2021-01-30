@@ -1,13 +1,14 @@
 -- Table for characters
 CREATE TABLE character
 (
-    id         INTEGER,
-    marvelId   INTEGER,
-    name       TEXT,
-    must_be_synced BOOLEAN default FALSE,
-    last_sync_at TIMESTAMP,
-    created_at TIMESTAMP default current_timestamp,
-    updated_at TIMESTAMP,
+    id             INTEGER,
+    marvelId       INTEGER,
+    nickname       TEXT,ó
+    full_name      TEXT,
+    must_be_synced BOOLEAN   default FALSE,
+    last_sync_at   TIMESTAMP,
+    created_at     TIMESTAMP default current_timestamp,
+    updated_at     TIMESTAMP,
     PRIMARY KEY (id)
 );
 
@@ -53,8 +54,12 @@ CREATE TABLE comic_creator
 );
 
 -- Indexes
-CREATE INDEX comic_character_comicid_index ON comic_character(comicId);
-CREATE INDEX comic_character_characterid_index ON comic_character(characterId);
+CREATE
+INDEX comic_character_comicid_index ON comic_character(comicId);
+CREATE
+INDEX comic_character_characterid_index ON comic_character(characterId);
 
-CREATE INDEX comic_creator_comicid_index ON comic_creator(comicId);
-CREATE INDEX comic_creator_characterid_index ON comic_creator(creatorId);
+CREATE
+INDEX comic_creator_comicid_index ON comic_creator(comicId);
+CREATE
+INDEX comic_creator_characterid_index ON comic_creator(creatorId);
