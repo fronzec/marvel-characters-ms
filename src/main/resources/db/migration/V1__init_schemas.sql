@@ -3,7 +3,7 @@ CREATE TABLE character
 (
     id             INTEGER,
     marvelId       INTEGER,
-    nickname       TEXT,ó
+    nickname       TEXT,
     full_name      TEXT,
     must_be_synced BOOLEAN   default FALSE,
     last_sync_at   TIMESTAMP,
@@ -31,7 +31,7 @@ CREATE TABLE creator
     name        TEXT,
     resourceURI TEXT,
     role        VARCHAR(32),
-    PRIMARY KEY (id) ó
+    PRIMARY KEY (id)
 );
 
 -- To store relations between comic and their characters
