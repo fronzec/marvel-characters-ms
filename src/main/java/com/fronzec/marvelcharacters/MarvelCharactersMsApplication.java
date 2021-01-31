@@ -4,7 +4,6 @@ import com.fronzec.marvelcharacters.domain.Character;
 import com.fronzec.marvelcharacters.repositories.CharacterRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,8 +16,11 @@ import java.util.Optional;
 public class MarvelCharactersMsApplication implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(MarvelCharactersMsApplication.class);
-    @Autowired
-    private CharacterRepository repository;
+    private final CharacterRepository repository;
+
+    public MarvelCharactersMsApplication(CharacterRepository repository) {
+        this.repository = repository;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(MarvelCharactersMsApplication.class, args);

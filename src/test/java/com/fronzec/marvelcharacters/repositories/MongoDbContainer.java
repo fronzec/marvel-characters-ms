@@ -1,10 +1,8 @@
 package com.fronzec.marvelcharacters.repositories;
 
-import com.sun.istack.internal.NotNull;
-import org.springframework.boot.test.util.TestPropertyValues;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.testcontainers.containers.GenericContainer;
+
+import javax.validation.constraints.NotNull;
 
 public class MongoDbContainer extends GenericContainer<MongoDbContainer> {
 
