@@ -26,3 +26,5 @@ curl --location --request GET 'http://localhost:80/marvel/characters/{{character
 
 ## Importan
 The application loads on startup, only info for Iron Man with nick `ironman` and Captain America `capamerica`, **You need to use the nicks on path variables**
+
+- On UNIX, sometimes we will need root access to run an app on port 80, you can change the application.properties to 8080 and also update the Dockerfile and docker-compose.yml
