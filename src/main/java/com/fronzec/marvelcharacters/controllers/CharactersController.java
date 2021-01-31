@@ -4,8 +4,6 @@ import com.fronzec.marvelcharacters.domain.Character;
 import com.fronzec.marvelcharacters.domain.CharacterDto;
 import com.fronzec.marvelcharacters.domain.CharactersData;
 import com.fronzec.marvelcharacters.repositories.CharacterRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

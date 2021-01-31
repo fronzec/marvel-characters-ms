@@ -59,7 +59,8 @@ public class MarvelApi {
                     .toUriString();
 
             ComicsResponseRoot response = restTemplate.getForObject(uri, ComicsResponseRoot.class);
-            if (response != null && response.getCode() != OK_CODE && response.getData() != null) {
+            if (response != null && response.getCode() == OK_CODE
+                    && response.getData() != null) {
                 totalItems = Optional.ofNullable(response.getData())
                         .map(ComicResponseData::getTotal)
                         .orElse(0);
