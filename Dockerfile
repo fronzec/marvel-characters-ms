@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-slim
+FROM openjdk:8-jdk-alpine
 
 RUN mkdir /code
 COPY target/*.jar /code
