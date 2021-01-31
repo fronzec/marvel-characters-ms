@@ -2,6 +2,8 @@
 
 Example ms using spring boot and marvel api, It concist in a remote fetching information to keep a daily sync of data,
 I'm using spring, scheduler, and mongo as DB.
+
+You can see a web documentation of How-to interact with the service [Here](https://documenter.getpostman.com/view/483767/TW6zFmNd)
 ## Run using docker and docker-compose
 1- Create a `.env` file, copy the content of `env.example`, add the **API_PUBLIC_KEY** and **API_PRIVATE_KEY** values, you can get this values from [Marvel Developers Portal](https://developer.marvel.com.).
 - Then, you can run this project with docker-compose using the script `run.sh`, and stop it using `stop.sh`
