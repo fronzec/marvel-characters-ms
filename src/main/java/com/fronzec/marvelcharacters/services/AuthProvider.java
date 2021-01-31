@@ -4,8 +4,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-
+/**
+ * Provedes auth info to use when we call marvel API
+ */
 @Service
 public class AuthProvider {
 
@@ -23,11 +24,11 @@ public class AuthProvider {
         return API_TS;
     }
 
-    public String getAPI_PUBLIC_KEY() {
+    public String getApiPublicKey() {
         return API_PUBLIC_KEY;
     }
 
-    public String getAPI_HASH() {
+    public String getApiHash() {
         return API_HASH;
     }
 }

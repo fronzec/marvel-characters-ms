@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class MarvelCharactersMsApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MarvelCharactersMsApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MarvelCharactersMsApplication.class, args);
+    }
 
 }

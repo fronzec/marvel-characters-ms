@@ -1,5 +1,8 @@
 package com.fronzec.marvelcharacters.services;
 
+import com.fronzec.marvelcharacters.domain.marvelresponses.ComicResponseData;
+import com.fronzec.marvelcharacters.domain.marvelresponses.ComicsResponseRoot;
+import com.fronzec.marvelcharacters.domain.marvelresponses.SingleComicResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -12,10 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Provide methods to interact with marvel api
+ */
 @Service
 public class MarvelApi {
 
     private static final Logger logger = LoggerFactory.getLogger(MarvelApi.class);
+    private static final int OK_CODE = 200;
     private String MarvelApiBaseUrl = "http://gateway.marvel.com/v1/public";
     private String GetComicsPath = "/characters/{characterId}/comics";
     private String Params = "?ts={ts}&apikey={apikey}&hash={hash}&offset={offset}&limit={limit}";
@@ -46,17 +53,23 @@ public class MarvelApi {
             logger.info("[MARVEL-REQUEST]:: requesting data with offset -> {}," +
                     " limit -> {}, totalItems -> {}", offset, limit, totalItems);
             String uri = UriComponentsBuilder.fromUriString(MarvelApiBaseUrl + GetComicsPath + Params)
-                    .buildAndExpand(characterId, AuthProvider.getApiTs(), authProvider.getAPI_PUBLIC_KEY(), authProvider.getAPI_HASH(), offset, limit)
+                    .buildAndExpand(characterId, AuthProvider.getApiTs(),
+                            authProvider.getApiPublicKey(), authProvider.getApiHash(),
+                            offset, limit)
                     .toUriString();
 
             ComicsResponseRoot response = restTemplate.getForObject(uri, ComicsResponseRoot.class);
-            if (response != null)
+            if (response != null && response.getCode() != OK_CODE && response.getData() != null) {
                 totalItems = Optional.ofNullable(response.getData())
                         .map(ComicResponseData::getTotal)
                         .orElse(0);
 
-            comics.addAll(response.getData().getResults());
-            logger.info("actual size -> {}", comics.size());
+                List<SingleComicResponse> results = Optional.ofNullable(response.getData())
+                        .map(ComicResponseData::getResults)
+                        .orElse(new ArrayList<>());
+                comics.addAll(results);
+            }
+
             offset += limit;
         } while (offset < totalItems);
 
