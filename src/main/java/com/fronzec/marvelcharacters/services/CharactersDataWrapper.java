@@ -2,6 +2,7 @@ package com.fronzec.marvelcharacters.services;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CharactersDataWrapper {
@@ -12,7 +13,7 @@ public class CharactersDataWrapper {
     @JsonProperty("collectionURI")
     private String collectionURI;
 
-    private List<SingleCharacterData> items;
+    private List<SingleCharacterData> items = new ArrayList<>();
 
     public CharactersDataWrapper() {
     }
@@ -39,5 +40,9 @@ public class CharactersDataWrapper {
 
     public void setItems(List<SingleCharacterData> items) {
         this.items = items;
+    }
+
+    public void propagateRootComic(final String comicName) {
+        this.items.forEach(singleCharacterData -> {singleCharacterData.setRootComic(comicName);});
     }
 }

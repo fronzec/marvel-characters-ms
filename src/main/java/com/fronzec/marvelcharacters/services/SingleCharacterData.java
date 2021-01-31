@@ -11,6 +11,8 @@ public class SingleCharacterData {
 
     private String name;
 
+    private String rootComic;
+
     private static final String prefix = "http://gateway.marvel.com/v1/public/characters/";
 
     public SingleCharacterData() {
@@ -34,5 +36,17 @@ public class SingleCharacterData {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getRootComic() {
+        return rootComic;
+    }
+
+    public void setRootComic(String rootComic) {
+        this.rootComic = rootComic;
+    }
+
+    public static String getPrefix() {
+        return prefix;
     }
 }

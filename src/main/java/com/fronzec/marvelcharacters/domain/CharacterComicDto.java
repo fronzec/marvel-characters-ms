@@ -11,6 +11,11 @@ public class CharacterComicDto {
     public CharacterComicDto() {
     }
 
+    public CharacterComicDto(String character, List<String> comics) {
+        this.character = character;
+        this.comics = comics;
+    }
+
     public String getCharacter() {
         return character;
     }
