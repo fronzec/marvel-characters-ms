@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Expose information related for the given character, by nick, also allow create news
+ */
 @RestController
 @RequestMapping("/characters")
 public class CharactersController {
 
-    private static final Logger logger = LoggerFactory.getLogger(CharactersController.class);
     private final CharacterRepository repository;
 
     public CharactersController(final CharacterRepository repository) {

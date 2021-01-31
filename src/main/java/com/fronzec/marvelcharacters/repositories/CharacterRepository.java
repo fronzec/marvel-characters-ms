@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface CharacterRepository extends MongoRepository<Character, String> {
-    public Optional<Character> findByNick(final String nick);
+    Optional<Character> findByNick(final String nick);
 }

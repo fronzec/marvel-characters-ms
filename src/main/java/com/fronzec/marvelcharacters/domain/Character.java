@@ -1,6 +1,6 @@
 package com.fronzec.marvelcharacters.domain;
 
-import com.fronzec.marvelcharacters.services.SingleComicResponse;
+import com.fronzec.marvelcharacters.domain.marvelresponses.SingleComicResponse;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

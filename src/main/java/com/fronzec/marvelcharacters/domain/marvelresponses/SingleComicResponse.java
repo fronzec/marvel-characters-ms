@@ -1,4 +1,4 @@
-package com.fronzec.marvelcharacters.services;
+package com.fronzec.marvelcharacters.domain.marvelresponses;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

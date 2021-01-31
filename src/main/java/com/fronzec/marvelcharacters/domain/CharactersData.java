@@ -2,12 +2,11 @@ package com.fronzec.marvelcharacters.domain;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.fronzec.marvelcharacters.services.CharactersDataWrapper;
-import com.fronzec.marvelcharacters.services.SingleComicResponse;
+import com.fronzec.marvelcharacters.domain.marvelresponses.CharactersDataWrapper;
+import com.fronzec.marvelcharacters.domain.marvelresponses.SingleComicResponse;
 
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 

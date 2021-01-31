@@ -2,8 +2,8 @@ package com.fronzec.marvelcharacters.domain;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.fronzec.marvelcharacters.services.CreatorsDataWrapper;
-import com.fronzec.marvelcharacters.services.SingleComicResponse;
+import com.fronzec.marvelcharacters.domain.marvelresponses.CreatorsDataWrapper;
+import com.fronzec.marvelcharacters.domain.marvelresponses.SingleComicResponse;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -16,11 +16,9 @@ public class CollaboratorsData {
     private static final String WRITER = "writer";
     private static final String COLORIST = "colorist";
     private Instant lastSync;
-    //editor
+
     private List<String> editors = new ArrayList<>();
-    //writer
     private List<String> writers = new ArrayList<>();
-    //colorist
     private List<String> colorists = new ArrayList<>();
 
     public CollaboratorsData() {
@@ -32,16 +30,16 @@ public class CollaboratorsData {
 
         result.stream().map(SingleComicResponse::getCreators)
                 .map(CreatorsDataWrapper::getItems)
-                .forEach( creators -> {
+                .forEach(creators -> {
                     creators.forEach(c -> {
-                        if(c.getRole().equals(EDITOR)) {
-                            if(!collaboratorsData.getEditors().contains(c.getName()))
+                        if (c.getRole().equals(EDITOR)) {
+                            if (!collaboratorsData.getEditors().contains(c.getName()))
                                 collaboratorsData.getEditors().add(c.getName());
-                        } else if(c.getRole().equals(WRITER)) {
-                            if(!collaboratorsData.getWriters().contains(c.getName()))
+                        } else if (c.getRole().equals(WRITER)) {
+                            if (!collaboratorsData.getWriters().contains(c.getName()))
                                 collaboratorsData.getWriters().add(c.getName());
-                        }else if(c.getRole().equals(COLORIST)) {
-                            if(!collaboratorsData.getColorists().contains(c.getName()))
+                        } else if (c.getRole().equals(COLORIST)) {
+                            if (!collaboratorsData.getColorists().contains(c.getName()))
                                 collaboratorsData.getColorists().add(c.getName());
                         }
                     });

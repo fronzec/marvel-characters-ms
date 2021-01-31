@@ -1,11 +1,12 @@
-package com.fronzec.marvelcharacters.services;
+package com.fronzec.marvelcharacters.domain.marvelresponses;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class CharactersDataWrapper {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CreatorsDataWrapper {
 
     private int available;
     private int returned;
@@ -13,9 +14,9 @@ public class CharactersDataWrapper {
     @JsonProperty("collectionURI")
     private String collectionURI;
 
-    private List<SingleCharacterData> items = new ArrayList<>();
+    private List<SingleCreatorData> items;
 
-    public CharactersDataWrapper() {
+    public CreatorsDataWrapper() {
     }
 
     public int getAvailable() {
@@ -34,15 +35,19 @@ public class CharactersDataWrapper {
         this.returned = returned;
     }
 
-    public List<SingleCharacterData> getItems() {
+    public List<SingleCreatorData> getItems() {
         return items;
     }
 
-    public void setItems(List<SingleCharacterData> items) {
+    public void setItems(List<SingleCreatorData> items) {
         this.items = items;
     }
 
-    public void propagateRootComic(final String comicName) {
-        this.items.forEach(singleCharacterData -> {singleCharacterData.setRootComic(comicName);});
+    public String getCollectionURI() {
+        return collectionURI;
+    }
+
+    public void setCollectionURI(String collectionURI) {
+        this.collectionURI = collectionURI;
     }
 }

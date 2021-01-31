@@ -10,17 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Allow get info of the colaborators for the given marvel character
+ */
 @RestController
 @RequestMapping("/colaborators")
 public class CollaboratorsController {
 
-    private CharacterRepository repository;
+    private final CharacterRepository repository;
 
     public CollaboratorsController(CharacterRepository repository) {
         this.repository = repository;
     }
 
-    // TODO: 30/01/2021 get method by character nickname
     @GetMapping("/{characterNick}")
     public CollaboratorsData getCollaborators(@PathVariable final String characterNick) {
         Character result = repository.findByNick(characterNick)
