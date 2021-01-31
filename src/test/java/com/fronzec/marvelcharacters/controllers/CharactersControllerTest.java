@@ -1,7 +1,9 @@
 package com.fronzec.marvelcharacters.controllers;
 
 import com.fronzec.marvelcharacters.domain.Character;
+import com.fronzec.marvelcharacters.domain.CharactersData;
 import com.fronzec.marvelcharacters.repositories.CharacterRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -31,6 +33,11 @@ class CharactersControllerTest {
     private CharacterRepository repository;
 
     Character result = new Character();
+
+    @BeforeEach
+    void setUp() {
+        result.setCharactersData(new CharactersData());
+    }
 
     @Test
     public void whenGetRelatedCharactersThenReturnInfo() throws Exception {
