@@ -1,6 +1,8 @@
 package com.fronzec.marvelcharacters.services;
 
 import com.fronzec.marvelcharacters.domain.Character;
+import com.fronzec.marvelcharacters.domain.CharactersData;
+import com.fronzec.marvelcharacters.domain.CollaboratorsData;
 import com.fronzec.marvelcharacters.repositories.CharacterRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +26,13 @@ public class SyncDataService {
 
     public void syncData() {
         logger.info("[SYNC-PROCESS]:: Syncing data");
-        final int captainamerica = 1009220;
-        final int ironman = 1009368;
-
-        List<SingleComicResponse> result = marvelApi.GetComicsRecursively(captainamerica);
-        // TODO: 30/01/2021 process and store them
+        List<Character> all = repository.findAll();
+        all.stream().filter(Character::isMustSync)
+                .forEach(character -> {
+                    logger.info("SYNCYNG -> {}", character.getName());
+                    List<SingleComicResponse> result = marvelApi.GetComicsRecursively(character.getMarvelId());
+                    Character updatedCharacter = Character.buildFrom(character, result);
+                    repository.save(updatedCharacter);
+                });
     }
 }

@@ -22,11 +22,10 @@ public class ScheduledTasks {
     /**
      * Every day at 12:00 am
      */
-    @Scheduled(cron = "0 0/1 * * * *")
+    @Scheduled(cron = "0 0/5 * * * *")
     public void scheduleTaskWithCronExpression() {
         logger.info("Cron Task: begin sync Current Time - {}", formatter.format(LocalDateTime.now()));
-        // TODO: 30/01/2021 trigger sync service
-        //syncDataService.syncData();
+        syncDataService.syncData();
         logger.info("Cron Task: end sync Current Time - {}", formatter.format(LocalDateTime.now()));
     }
 }

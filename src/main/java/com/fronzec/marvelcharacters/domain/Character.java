@@ -26,22 +26,16 @@ public class Character {
     public Character() {
     }
 
-    public static Character buildFrom(final int marvelId,
-                                      final String name,
-                                      final String nick,
+    public static Character buildFrom(final Character character,
                                       final List<SingleComicResponse> result) {
         // Propagate root comic name
         result.forEach(singleComicResponse -> singleComicResponse.getCharacters().propagateRootComic(singleComicResponse.getTitle()));
 
         CollaboratorsData collaboratorsData = CollaboratorsData.buildFrom(result);
         CharactersData charactersData = CharactersData.buildFrom(result);
-        Character character = new Character();
         character.setCharactersData(charactersData);
         character.setCollaboratorsData(collaboratorsData);
-        character.setMarvelId(marvelId);
-        character.setNick(nick);
-        character.setName(name);
-        return new Character();
+        return character;
     }
 
     public String getId() {

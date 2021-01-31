@@ -65,11 +65,11 @@ public class MarvelApi {
                         .orElse(0);
 
             comics.addAll(response.getData().getResults());
-            logger.info("actual size -> {} contentjsonified -> {}", comics.size(), JsonMapper.writeValueAsString(comics));
+            logger.info("actual size -> {}", comics.size());
             offset += limit;
         } while (offset < totalItems);
 
-        logger.info("Total response size -> {} contentjsonified -> {}", comics.size(), JsonMapper.writeValueAsString(comics));
+        logger.info("Total response size -> {}", comics.size());
         return comics;
     }
 

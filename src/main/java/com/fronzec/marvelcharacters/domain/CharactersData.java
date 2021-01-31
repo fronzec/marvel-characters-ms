@@ -30,10 +30,12 @@ public class CharactersData {
                 .forEach(charsPerComic -> {
                     charsPerComic.forEach(singleChar ->
                     {
+
                         if (!map.containsKey(singleChar.getName())) {
-                            map.put(singleChar.getName(), Collections.singletonList(singleChar.getRootComic()));
+                            List<String> comicList = new ArrayList<>();
+                            comicList.add(singleChar.getRootComic());
+                            map.put(singleChar.getName(), comicList);
                         } else {
-                            // TODO: 30/01/2021 we could use dinstict
                             List<String> comics = map.get(singleChar.getName());
                             if (!comics.contains(singleChar.getRootComic()))
                                 comics.add(singleChar.getRootComic());
