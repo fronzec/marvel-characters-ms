@@ -1,9 +1,7 @@
 package com.fronzec.marvelcharacters.services;
 
-import com.fronzec.marvelcharacters.util.JsonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -22,22 +20,15 @@ public class MarvelApi {
     private String GetComicsPath = "/characters/{characterId}/comics";
     private String Params = "?ts={ts}&apikey={apikey}&hash={hash}&offset={offset}&limit={limit}";
 
-    private String API_TS;
-    private String API_KEY;
-    private String API_HASH;
-
     private RestTemplate restTemplate;
+    private AuthProvider authProvider;
 
     public MarvelApi(final RestTemplateBuilder restTemplateBuilder,
-                     final @Value("${marvel.api.ts}") String apiTS,
-                     final @Value("${marvel.api.key}") String apiKey,
-                     final @Value("${marvel.api.hash}") String apiHash) {
+                     final AuthProvider authProvider) {
         this.restTemplate = restTemplateBuilder.setConnectTimeout(Duration.ofSeconds(32))
                 .setReadTimeout(Duration.ofSeconds(32))
                 .build();
-        this.API_TS = apiTS;
-        this.API_KEY = apiKey;
-        this.API_HASH = apiHash;
+        this.authProvider = authProvider;
     }
 
 
@@ -55,7 +46,7 @@ public class MarvelApi {
             logger.info("[MARVEL-REQUEST]:: requesting data with offset -> {}," +
                     " limit -> {}, totalItems -> {}", offset, limit, totalItems);
             String uri = UriComponentsBuilder.fromUriString(MarvelApiBaseUrl + GetComicsPath + Params)
-                    .buildAndExpand(characterId, API_TS, API_KEY, API_HASH, offset, limit)
+                    .buildAndExpand(characterId, AuthProvider.getApiTs(), authProvider.getAPI_PUBLIC_KEY(), authProvider.getAPI_HASH(), offset, limit)
                     .toUriString();
 
             ComicsResponseRoot response = restTemplate.getForObject(uri, ComicsResponseRoot.class);

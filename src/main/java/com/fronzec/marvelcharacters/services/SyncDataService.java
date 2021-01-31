@@ -29,10 +29,14 @@ public class SyncDataService {
         List<Character> all = repository.findAll();
         all.stream().filter(Character::isMustSync)
                 .forEach(character -> {
-                    logger.info("SYNCYNG -> {}", character.getName());
-                    List<SingleComicResponse> result = marvelApi.GetComicsRecursively(character.getMarvelId());
-                    Character updatedCharacter = Character.buildFrom(character, result);
-                    repository.save(updatedCharacter);
+                    try {
+                        logger.info("SYNCYNG -> {}", character.getName());
+                        List<SingleComicResponse> result = marvelApi.GetComicsRecursively(character.getMarvelId());
+                        Character updatedCharacter = Character.buildFrom(character, result);
+                        repository.save(updatedCharacter);
+                    } catch (Exception e) {
+                        logger.error("Error syncing data for -> {} e -> {}", character.getName(), e.getMessage(), e);
+                    }
                 });
     }
 }
