@@ -1,12 +1,14 @@
 package com.fronzec.marvelcharacters.services;
 
 import com.fronzec.marvelcharacters.domain.marvelresponses.SingleComicResponse;
+import com.fronzec.marvelcharacters.repositories.CharacterRepository;
 import com.fronzec.marvelcharacters.utiltests.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -27,7 +29,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 @ExtendWith(SpringExtension.class)
 @RestClientTest(MarvelApi.class)
-@Import(value = {AuthProvider.class})
+@Import(value = {AuthProvider.class, CharacterRepository.class})
 class MarvelApiTest {
 
     @Autowired
@@ -38,6 +40,9 @@ class MarvelApiTest {
 
     @Autowired
     private MarvelApi marvelApi;
+
+    @MockBean
+    private CharacterRepository repository;
 
     private static final int OK_CODE = 200;
     private String MarvelApiBaseUrl = "http://gateway.marvel.com/v1/public";

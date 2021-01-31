@@ -27,33 +27,24 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
-@ContextConfiguration(initializers = CharacterRepositoryTest.MongoDbInitializer.class)
-@ExtendWith(SpringExtension.class)
-@AutoConfigureMockMvc
-@Slf4j
 class CharacterRepositoryTest {
 
-    @Autowired
     private CharacterRepository repository;
 
     List<SingleComicResponse> responseList;
 
     private static MongoDbContainer mongoDbContainer;
 
-    @BeforeAll
     public static void startContainerAndPublicPortIsAvailable() {
         mongoDbContainer = new MongoDbContainer();
         mongoDbContainer.start();
     }
 
-    @BeforeEach
     void setUp() {
         SingleComicResponse[] ra = JsonMapper.toObject(TestUtils.readFile("response_list_comics.json"), SingleComicResponse[].class);
         this.responseList = Arrays.asList(ra);
     }
 
-    @Test
     void whenCreateCharacterAllOk() {
         Character baseCharacter = new Character();
         baseCharacter.setNick("myhero");
@@ -84,9 +75,7 @@ class CharacterRepositoryTest {
     public static class MongoDbInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
         @Override
         public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-            log.info("Overrding Spring Properties for mongodb !!!!!!!!!");
-
-            TestPropertyValues values = TestPropertyValues.of(
+                        TestPropertyValues values = TestPropertyValues.of(
                     "spring.data.mongodb.host=" + mongoDbContainer.getContainerIpAddress(),
                     "spring.data.mongodb.port=" + mongoDbContainer.getPort()
 
