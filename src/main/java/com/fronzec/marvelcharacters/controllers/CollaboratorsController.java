@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
+
 /**
  * Allow get info of the colaborators for the given marvel character
  */
@@ -27,6 +29,7 @@ public class CollaboratorsController {
     public CollaboratorsData getCollaborators(@PathVariable final String characterNick) {
         Character result = repository.findByNick(characterNick)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        return result.getCollaboratorsData();
+        return Optional.ofNullable(result.getCollaboratorsData())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
     }
 }

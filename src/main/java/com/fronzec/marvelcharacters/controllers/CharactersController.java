@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
+
 /**
  * Expose information related for the given character, by nick, also allow create news
  */
@@ -30,7 +32,8 @@ public class CharactersController {
     public CharactersData getRelatedCharacters(@PathVariable final String characterNick) {
         Character result = repository.findByNick(characterNick)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        return result.getCharactersData();
+        return Optional.ofNullable(result.getCharactersData())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
     }
 
     @PostMapping
